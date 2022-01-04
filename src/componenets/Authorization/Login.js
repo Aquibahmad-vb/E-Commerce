@@ -24,12 +24,12 @@ const Login = () => {
                 <form onSubmit={check}>
                 <div className='my-4 mx-5 '>
                     <i className="fas fa-user-tie fw-bold fs-4 mx-2"></i>
-                    <input type="text" placeholder='username or email' id='name' minLength={5} size={60} className='rounded-pill px-3 py-1'/>
+                    <input type="text" placeholder='username or email' id='name' minLength={5} size={60} className='rounded-pill px-3 py-1' style={{width:"85%"}}/>
                     
                </div>
                 <div className='my-4 mx-5 '>
                     <i className="fas fa-lock fw-bold fs-4 mx-2"></i>
-                    <input type={checked?"text":"password"} placeholder='Password' minLength={8} size={60} className='rounded-pill px-3 py-1'/>
+                    <input type={checked?"text":"password"} placeholder='Password' minLength={8} size={60} className='rounded-pill px-3 py-1' style={{width:"85%"}}/>
                </div>
                <div className='my-4 mx-5 mt-1'>
                    <span className='mx-5'>
