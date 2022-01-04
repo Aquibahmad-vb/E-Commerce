@@ -45,6 +45,7 @@ const Register = () => {
             <div className="my-2 mx-5 ">
               <p className="mb-1 fw-bold">Name</p>
               <input
+                required
                 type="text"
                 placeholder="Name"
                 id="name"
@@ -61,6 +62,7 @@ const Register = () => {
             <div className="my-2 mx-5 ">
               <p className="mb-1 fw-bold ">E-Mail</p>
               <input
+                required
                 type="text"
                 placeholder="E-mail"
                 id="email"
@@ -78,6 +80,7 @@ const Register = () => {
             <div className="my-2 mx-5 ">
               <p className="mb-1 fw-bold">Phone No</p>
               <input
+                required
                 type="Number"
                 placeholder="Phone No"
                 id="phoneno"
@@ -94,6 +97,7 @@ const Register = () => {
             <div className="my-2 mx-5 ">
               <p className="mb-1 fw-bold">Gender</p>
               <select
+                required
                 style={{
                   border: "none",
                   borderBottom: "1px solid",
@@ -111,6 +115,7 @@ const Register = () => {
               <p className="mb-1 fw-bold">Password</p>
               <div className="input-group mb-3">
                 <input
+                  required
                   type={checked ? "text" : "password"}
                   placeholder="Password"
                   id="password"
@@ -136,6 +141,7 @@ const Register = () => {
               <p className="mb-1 fw-bold">Confirm Password</p>
               <div className="input-group mb-3">
                 <input
+                  required
                   type={checkedConfirmedPassword ? "text" : "password"}
                   placeholder="Confirm Password"
                   id="confirmpassword"
@@ -162,7 +168,12 @@ const Register = () => {
             </div>
             <div className="my-4 mx-1 mt-2">
               <span className="mx-5">
-                <input type="checkbox" id="check" className="fs-4 mx-1" />
+                <input
+                  type="checkbox"
+                  required
+                  id="check"
+                  className="fs-4 mx-1"
+                />
                 <label htmlFor="check" style={{ color: "gray" }}>
                   I Accept All The Terms And Contions
                 </label>

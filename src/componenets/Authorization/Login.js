@@ -31,10 +31,10 @@ const Login = () => {
             <div className="my-4 mx-5 ">
               <i className="fas fa-user-tie fw-bold fs-4 mx-2"></i>
               <input
+                required
                 type="text"
                 placeholder="username or email"
                 id="name"
-                minLength={5}
                 size={60}
                 className="rounded-pill px-3 py-1"
                 style={{ width: "85%" }}
@@ -43,9 +43,9 @@ const Login = () => {
             <div className="my-4 mx-5 ">
               <i className="fas fa-lock fw-bold fs-4 mx-2"></i>
               <input
+                required
                 type={checked ? "text" : "password"}
                 placeholder="Password"
-                minLength={8}
                 size={60}
                 className="rounded-pill px-3 py-1"
                 style={{ width: "85%" }}
@@ -54,6 +54,7 @@ const Login = () => {
             <div className="my-4 mx-5 mt-1">
               <span className="mx-5">
                 <input
+                  required
                   type="checkbox"
                   onChange={handleCheckBox}
                   id="check"
