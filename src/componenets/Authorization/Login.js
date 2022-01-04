@@ -37,6 +37,7 @@ const Login = () => {
                 minLength={5}
                 size={60}
                 className="rounded-pill px-3 py-1"
+                style={{ width: "85%" }}
               />
             </div>
             <div className="my-4 mx-5 ">
@@ -47,6 +48,7 @@ const Login = () => {
                 minLength={8}
                 size={60}
                 className="rounded-pill px-3 py-1"
+                style={{ width: "85%" }}
               />
             </div>
             <div className="my-4 mx-5 mt-1">
@@ -57,7 +59,7 @@ const Login = () => {
                   id="check"
                   className="fs-4 mx-1"
                 />
-                <label for="check">Show Password</label>
+                <label htmlFor="check">Show Password</label>
               </span>
             </div>
             <div class="d-grid gap-3 mx-5 my-3">

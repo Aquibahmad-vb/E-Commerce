@@ -10,7 +10,7 @@ const Register = () => {
 
   const check = (e) => {
     e.preventDefault();
-    alert("hello");
+    alert("Submit");
   };
   const watchPassword = () => {
     setVisiblePassword(!visiblePassword);
@@ -21,9 +21,14 @@ const Register = () => {
     setVisibleConfirmPassword(!visibleConfirmPassword);
     setCheckedConfirmedPassword(!checkedConfirmedPassword);
   };
+  const style = {
+    position: "relative",
+    right: "20px",
+  };
+
   return (
     <>
-      <div id="login" className="container border border-3 my-5 col-10 login">
+      <div id="signUp" className="container border border-3 my-1 col-10 signUp">
         <div className="mx-3 my-3 border border-2">
           <div className="mt-3">
             <p className="text-center">
@@ -31,9 +36,9 @@ const Register = () => {
                 className="fas fa-user fa-5x  "
                 style={{ color: "orange" }}
               ></i>
-              <p className="text-center fs-2" style={{ color: "gray" }}>
-                User Details
-              </p>
+            </p>
+            <p className="text-center fs-2" style={{ color: "gray" }}>
+              User Details
             </p>
           </div>
           <form onSubmit={check} style={{ marginLeft: "50px" }}>
@@ -73,8 +78,7 @@ const Register = () => {
             <div className="my-2 mx-5 ">
               <p className="mb-1 fw-bold">Phone No</p>
               <input
-                type="text"
-                maxlength="10"
+                type="Number"
                 placeholder="Phone No"
                 id="phoneno"
                 size={60}
@@ -88,56 +92,83 @@ const Register = () => {
               />
             </div>
             <div className="my-2 mx-5 ">
-              <p className="mb-1 fw-bold">Password</p>
-              <input
-                type={checked ? "text" : "password"}
-                placeholder="Password"
-                id="password"
-                size={60}
-                className="px-1"
+              <p className="mb-1 fw-bold">Gender</p>
+              <select
                 style={{
                   border: "none",
                   borderBottom: "1px solid",
                   outline: 0,
                   width: "90%",
                 }}
-              />
-              {visiblePassword ? (
-                <i class="fas fa-eye" onClick={watchPassword}></i>
-              ) : (
-                <i class="fas fa-eye-slash" onClick={watchPassword}></i>
-              )}
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+
+            <div className="my-2 mx-5 ">
+              <p className="mb-1 fw-bold">Password</p>
+              <div className="input-group mb-3">
+                <input
+                  type={checked ? "text" : "password"}
+                  placeholder="Password"
+                  id="password"
+                  size={60}
+                  className="px-1"
+                  style={{
+                    border: "none",
+                    borderBottom: "1px solid",
+                    outline: 0,
+                    width: "90%",
+                  }}
+                />
+                <div style={style}>
+                  {visiblePassword ? (
+                    <i className="fas fa-eye" onClick={watchPassword}></i>
+                  ) : (
+                    <i className="fas fa-eye-slash" onClick={watchPassword}></i>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="my-2 mx-5 ">
               <p className="mb-1 fw-bold">Confirm Password</p>
-              <input
-                type={checkedConfirmedPassword ? "text" : "password"}
-                placeholder="Confirm Password"
-                id="confirmpassword"
-                size={60}
-                className="px-1"
-                style={{
-                  border: "none",
-                  borderBottom: "1px solid",
-                  outline: 0,
-                  width: "90%",
-                }}
-              />
-              {visibleConfirmPassword ? (
-                <i class="fas fa-eye" onClick={confirmPassword}></i>
-              ) : (
-                <i class="fas fa-eye-slash" onClick={confirmPassword}></i>
-              )}
+              <div className="input-group mb-3">
+                <input
+                  type={checkedConfirmedPassword ? "text" : "password"}
+                  placeholder="Confirm Password"
+                  id="confirmpassword"
+                  size={60}
+                  className="px-1"
+                  style={{
+                    border: "none",
+                    borderBottom: "1px solid",
+                    outline: 0,
+                    width: "90%",
+                  }}
+                />
+                <div style={style}>
+                  {visibleConfirmPassword ? (
+                    <i className="fas fa-eye" onClick={confirmPassword}></i>
+                  ) : (
+                    <i
+                      className="fas fa-eye-slash"
+                      onClick={confirmPassword}
+                    ></i>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="my-4 mx-1 mt-2">
               <span className="mx-5">
                 <input type="checkbox" id="check" className="fs-4 mx-1" />
-                <label for="check" style={{ color: "gray" }}>
+                <label htmlFor="check" style={{ color: "gray" }}>
                   I Accept All The Terms And Contions
                 </label>
               </span>
             </div>
-            <div class="d-grid gap-2 mx-5 col-10 my-3">
+            <div className="d-grid gap-2 mx-5 col-10 my-3">
               <input
                 type="submit"
                 value="Submit"
@@ -147,7 +178,7 @@ const Register = () => {
           </form>
           <div className="mt-3 mx-5">
             <span className="row align-items-start mx-2">
-              <div className="text-end my-3">
+              <div className="text-end my-1">
                 have an account?{" "}
                 <Link to="/" style={{ textDecoration: "none" }}>
                   Login
