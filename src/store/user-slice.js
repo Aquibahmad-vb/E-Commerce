@@ -1,9 +1,8 @@
-import { faUserSlash } from "@fortawesome/free-solid-svg-icons";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: {},
-  loginUser:[]
+  loginUser: [],
 };
 
 const userSlice = createSlice({
@@ -14,10 +13,10 @@ const userSlice = createSlice({
       state.user = [...state.user, action.payload];
     },
     userLogin: (state, action) => {
-      state.loginUser =action.payload;
+      state.loginUser = action.payload;
     },
   },
 });
 
-// export const userAction = userSlice.reducer
+export const userAction = userSlice.actions;
 export default userSlice;

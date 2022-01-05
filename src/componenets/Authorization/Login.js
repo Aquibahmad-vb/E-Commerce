@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 
@@ -13,14 +13,14 @@ const initialState = {
   },
 };
 
-
 const Login = () => {
   const [checked, setchecked] = useState(false);
+  const navigate = useNavigate();
 
   const [state, setState] = useState(initialState);
 
   const {
-    loginDetails: {email, password },
+    loginDetails: { email, password },
   } = state;
 
   const dispatch = useDispatch();
@@ -32,6 +32,7 @@ const Login = () => {
     event.preventDefault();
     dispatch(loginUser({ loginDetails: { ...state.loginDetails } }));
     setState(initialState);
+    navigate("/home");
   };
 
   const handleLoginSubmit = (event) => {
@@ -96,7 +97,9 @@ const Login = () => {
                   id="check"
                   className="fs-4 mx-1"
                 />
-                <label htmlFor="check" style={{color:"gray"}}>Show Password</label>
+                <label htmlFor="check" style={{ color: "gray" }}>
+                  Show Password
+                </label>
               </span>
             </div>
             <div className="d-grid gap-3 mx-5 my-3">

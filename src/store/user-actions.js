@@ -1,6 +1,5 @@
 import axios from "axios";
-// import { userAction } from "./user-slice";
-
+import { userAction } from "./user-slice";
 
 const baseUrl = `http://localhost:3000`;
 
@@ -17,14 +16,13 @@ export const registerUsers = (userValue) => {
       return response;
     };
     try {
-      const userData = await RegistUser();
+      await RegistUser();
     } catch (error) {
       console.log(error.message);
     }
   };
 };
 export const loginUser = (userValue) => {
-  console.log(userValue)
   return async (dispatch) => {
     const loginUser = async () => {
       const response = await axios.post(
@@ -38,8 +36,7 @@ export const loginUser = (userValue) => {
     };
     try {
       const loginUsers = await loginUser();
-      // dispatch(userAction.userLogin(loginUser))
-      console.log(loginUsers)
+      dispatch(userAction.userLogin(loginUsers));
     } catch (error) {
       console.log(error.message);
     }
