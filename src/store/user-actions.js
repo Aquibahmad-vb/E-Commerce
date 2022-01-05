@@ -1,9 +1,10 @@
 import axios from "axios";
+// import { userAction } from "./user-slice";
+
 
 const baseUrl = `http://localhost:3000`;
 
 export const registerUsers = (userValue) => {
-  console.log(userValue.userDetails, "userValue");
   return async (dispatch) => {
     const RegistUser = async () => {
       const response = await axios.post(
@@ -17,6 +18,28 @@ export const registerUsers = (userValue) => {
     };
     try {
       const userData = await RegistUser();
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+export const loginUser = (userValue) => {
+  console.log(userValue)
+  return async (dispatch) => {
+    const loginUser = async () => {
+      const response = await axios.post(
+        `${baseUrl}/login`,
+        userValue.loginDetails
+      );
+      if (response.status === "failure") {
+        throw new Error(response.data.message);
+      }
+      return response;
+    };
+    try {
+      const loginUsers = await loginUser();
+      // dispatch(userAction.userLogin(loginUser))
+      console.log(loginUsers)
     } catch (error) {
       console.log(error.message);
     }

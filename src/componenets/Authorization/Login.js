@@ -2,16 +2,48 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useDispatch } from "react-redux";
+
+import { loginUser } from "../../store/user-actions";
+
+const initialState = {
+  loginDetails: {
+    email: "",
+    password: "",
+  },
+};
+
+
 const Login = () => {
   const [checked, setchecked] = useState(false);
+
+  const [state, setState] = useState(initialState);
+
+  const {
+    loginDetails: {email, password },
+  } = state;
+
+  const dispatch = useDispatch();
 
   const handleCheckBox = () => {
     setchecked(!checked);
   };
-  const check = (e) => {
-    e.preventDefault();
-    alert("hello");
+  const loginUsers = (event) => {
+    event.preventDefault();
+    dispatch(loginUser({ loginDetails: { ...state.loginDetails } }));
+    setState(initialState);
   };
+
+  const handleLoginSubmit = (event) => {
+    setState({
+      ...state,
+      loginDetails: {
+        ...state.loginDetails,
+        [event.target.name]: event.target.value,
+      },
+    });
+  };
+
   return (
     <>
       <div id="login" className="container border border-3 my-5 col-6 login">
@@ -27,14 +59,16 @@ const Login = () => {
               ></i>
             </p>
           </div>
-          <form onSubmit={check}>
+          <form onSubmit={loginUsers}>
             <div className="my-4 mx-5 ">
               <i className="fas fa-user-tie fw-bold fs-4 mx-2"></i>
               <input
                 required
                 type="text"
                 placeholder="username or email"
-                id="name"
+                name="email"
+                value={email}
+                onChange={handleLoginSubmit}
                 size={60}
                 className="rounded-pill px-3 py-1"
                 style={{ width: "85%" }}
@@ -46,6 +80,9 @@ const Login = () => {
                 required
                 type={checked ? "text" : "password"}
                 placeholder="Password"
+                name="password"
+                onChange={handleLoginSubmit}
+                value={password}
                 size={60}
                 className="rounded-pill px-3 py-1"
                 style={{ width: "85%" }}
@@ -54,16 +91,15 @@ const Login = () => {
             <div className="my-4 mx-5 mt-1">
               <span className="mx-5">
                 <input
-                  required
                   type="checkbox"
                   onChange={handleCheckBox}
                   id="check"
                   className="fs-4 mx-1"
                 />
-                <label htmlFor="check">Show Password</label>
+                <label htmlFor="check" style={{color:"gray"}}>Show Password</label>
               </span>
             </div>
-            <div class="d-grid gap-3 mx-5 my-3">
+            <div className="d-grid gap-3 mx-5 my-3">
               <input
                 type="submit"
                 value="Log In"
@@ -71,7 +107,7 @@ const Login = () => {
               />
             </div>
           </form>
-          <div className="mt-3 mx-5">
+          <div className="mt-3 mx-4">
             <span className="row align-items-start mx-2">
               <p className="text-start mx-5 col">
                 <Link style={{ textDecoration: "none" }} to="/signup">
