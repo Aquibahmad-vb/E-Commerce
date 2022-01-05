@@ -1,5 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
+import { registerUsers } from "../../store/user-actions";
+
+const initialState = {
+  userDetails: {
+    name: "",
+    email: "",
+    phone: "",
+    gender: "",
+    password: "",
+    confirmPassword: "",
+  },
+};
 
 const Register = () => {
   const [visiblePassword, setVisiblePassword] = useState(false);
@@ -7,23 +21,41 @@ const Register = () => {
   const [checked, setchecked] = useState(false);
   const [checkedConfirmedPassword, setCheckedConfirmedPassword] =
     useState(false);
+  const [state, setState] = useState(initialState);
 
-  const check = (e) => {
+  const {
+    userDetails: { name, email, phone, gender, password, confirmPassword },
+  } = state;
+
+  const dispatch = useDispatch();
+
+  const SubmitUser = (e) => {
     e.preventDefault();
-    alert("Submit");
+    dispatch(registerUsers({ userDetails: { ...state.userDetails } }));
+    setState(initialState);
   };
   const watchPassword = () => {
     setVisiblePassword(!visiblePassword);
     setchecked(!checked);
   };
 
-  const confirmPassword = () => {
+  const checkConfirmsPassword = () => {
     setVisibleConfirmPassword(!visibleConfirmPassword);
     setCheckedConfirmedPassword(!checkedConfirmedPassword);
   };
   const style = {
     position: "relative",
     right: "20px",
+  };
+
+  const handleUserSubmit = (event) => {
+    setState({
+      ...state,
+      userDetails: {
+        ...state.userDetails,
+        [event.target.name]: event.target.value,
+      },
+    });
   };
 
   return (
@@ -41,15 +73,16 @@ const Register = () => {
               User Details
             </p>
           </div>
-          <form onSubmit={check} style={{ marginLeft: "50px" }}>
+          <form onSubmit={SubmitUser} style={{ marginLeft: "50px" }}>
             <div className="my-2 mx-5 ">
               <p className="mb-1 fw-bold">Name</p>
               <input
-                required
                 type="text"
                 placeholder="Name"
+                name="name"
+                onChange={handleUserSubmit}
                 id="name"
-                minLength={5}
+                value={name}
                 size={60}
                 style={{
                   border: "none",
@@ -62,11 +95,11 @@ const Register = () => {
             <div className="my-2 mx-5 ">
               <p className="mb-1 fw-bold ">E-Mail</p>
               <input
-                required
                 type="text"
                 placeholder="E-mail"
-                id="email"
-                minLength={5}
+                name="email"
+                value={email}
+                onChange={handleUserSubmit}
                 size={60}
                 className="px-1"
                 style={{
@@ -80,10 +113,11 @@ const Register = () => {
             <div className="my-2 mx-5 ">
               <p className="mb-1 fw-bold">Phone No</p>
               <input
-                required
                 type="Number"
                 placeholder="Phone No"
-                id="phoneno"
+                name="phone"
+                value={phone}
+                onChange={handleUserSubmit}
                 size={60}
                 className="px-1"
                 style={{
@@ -97,14 +131,19 @@ const Register = () => {
             <div className="my-2 mx-5 ">
               <p className="mb-1 fw-bold">Gender</p>
               <select
-                required
                 style={{
                   border: "none",
                   borderBottom: "1px solid",
                   outline: 0,
                   width: "90%",
                 }}
+                onChange={handleUserSubmit}
+                name="gender"
+                value={gender}
               >
+                <option value="gender" hidden>
+                  Select Gender
+                </option>
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Others">Others</option>
@@ -115,10 +154,11 @@ const Register = () => {
               <p className="mb-1 fw-bold">Password</p>
               <div className="input-group mb-3">
                 <input
-                  required
                   type={checked ? "text" : "password"}
                   placeholder="Password"
-                  id="password"
+                  name="password"
+                  onChange={handleUserSubmit}
+                  value={password}
                   size={60}
                   className="px-1"
                   style={{
@@ -141,10 +181,11 @@ const Register = () => {
               <p className="mb-1 fw-bold">Confirm Password</p>
               <div className="input-group mb-3">
                 <input
-                  required
                   type={checkedConfirmedPassword ? "text" : "password"}
                   placeholder="Confirm Password"
-                  id="confirmpassword"
+                  name="confirmPassword"
+                  onChange={handleUserSubmit}
+                  value={confirmPassword}
                   size={60}
                   className="px-1"
                   style={{
@@ -156,11 +197,14 @@ const Register = () => {
                 />
                 <div style={style}>
                   {visibleConfirmPassword ? (
-                    <i className="fas fa-eye" onClick={confirmPassword}></i>
+                    <i
+                      className="fas fa-eye"
+                      onClick={checkConfirmsPassword}
+                    ></i>
                   ) : (
                     <i
                       className="fas fa-eye-slash"
-                      onClick={confirmPassword}
+                      onClick={checkConfirmsPassword}
                     ></i>
                   )}
                 </div>
@@ -168,12 +212,7 @@ const Register = () => {
             </div>
             <div className="my-4 mx-1 mt-2">
               <span className="mx-5">
-                <input
-                  type="checkbox"
-                  required
-                  id="check"
-                  className="fs-4 mx-1"
-                />
+                <input type="checkbox" id="check" className="fs-4 mx-1" />
                 <label htmlFor="check" style={{ color: "gray" }}>
                   I Accept All The Terms And Contions
                 </label>
